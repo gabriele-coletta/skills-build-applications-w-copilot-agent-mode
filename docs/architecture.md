@@ -28,13 +28,13 @@ OctoFit Tracker is a three-tier application for a school fitness program. The st
 
 ## Implementation decisions
 
-- **Presentation tier**: Keep pages focused on rendering and user interaction; use the shared API client for relative `/api` requests. Represent loading, empty, and request-error states accessibly, and do not put persistence or business rules in the UI.
-- **Logic tier**: Implement the API contract in Express routes/services. Validate request shape and referenced IDs before persistence, return deliberate 4xx responses for invalid or unknown resources, and keep business calculations out of routes where a service can own them.
-- **Data tier**: Use Mongoose models for persisted fields, required values, and references. Keep seed data representative of all four capabilities and safe to run repeatedly.
+- **Presentation tier decision**: Keep pages focused on rendering and user interaction; use the shared API client for relative `/api` requests. Represent loading, empty, and request-error states accessibly, and do not put persistence or business rules in the UI.
+- **Logic tier decision**: Implement the API contract in Express routes/services. Validate request shape and referenced IDs before persistence, return deliberate 4xx responses for invalid or unknown resources, and keep business calculations out of routes where a service can own them.
+- **Data tier decision**: Use Mongoose models for persisted fields, required values, and references. Keep seed data representative of all four capabilities and safe to run repeatedly.
 - **Activity tracking**: Create activities only for existing users and teams; persist their references, type, and minutes together with centrally computed points and an occurrence date. Return useful activity data from list and create endpoints.
-- **Team management**: Require a team name, preserve its mascot, and store member references. List and create teams through the API rather than accessing the database from the presentation tier.
-- **Leaderboard**: Aggregate activity points by team in the logic tier, sort totals highest-first, and assign ranks starting at 1. Return the team name and total with each rank.
-- **Workout suggestions**: Match the requested email to a seeded user, use that user's goal and recent activity to choose relevant suggestions, and include a reason for the first suggestion. Return a deliberate 4xx when no user matches.
+- **Team management approach**: Require a team name, preserve its mascot, and store member references. List and create teams through the API rather than accessing the database from the presentation tier.
+- **Leaderboard approach**: Aggregate activity points by team in the logic tier, sort totals highest-first, and assign ranks starting at 1. Return the team name and total with each rank.
+- **Workout suggestions approach**: Match the requested email to a seeded user, use that user's goal and recent activity to choose relevant suggestions, and include a reason for the first suggestion. Return a deliberate 4xx when no user matches.
 
 ## Test plan
 
